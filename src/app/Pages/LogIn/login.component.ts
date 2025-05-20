@@ -57,11 +57,19 @@ if(this.loginForm.status=="VALID"){
        setTimeout(() => {
 console.log(result.data.token);
         localStorage.setItem("userToken",result.data.token)
-
+  
+/**  this.userName=this.userToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
+    this.userId=this.userToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]
+    this.userRole=this.userToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+ */
 this.loginService.getUserToken();
 
+          if(localStorage.getItem("userRole")=="Student"){
 
-          this.router.navigate(["/home"])
+            this.router.navigate(["/S/home"])
+          }else if(localStorage.getItem("userRole")=="Teacher"){
+            this.router.navigate(["/T/home"])
+          }
         }, 1000);
       if(result.isPass == false){
           this.error=true;

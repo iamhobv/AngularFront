@@ -25,7 +25,6 @@
               }
             ],
             "styles": [
-              
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
@@ -52,7 +51,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/Shared/environment.ts",
+                  "with": "src/app/Shared/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

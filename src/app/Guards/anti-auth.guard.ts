@@ -6,8 +6,16 @@ export const antiAuthGuard: CanActivateFn = (route, state) => {
     const router = inject(Router);
   if(localStorage.getItem("userToken")!=null){
   
-    router.navigate(["/home"])
+    if(localStorage.getItem("userRole")=="Student"){
+ router.navigate(["/S/home"])
       return false;
+    }
+     if(localStorage.getItem("userRole")=="Teacher"){
+ router.navigate(["/T/home"])
+      return false;
+    }
+
+   
     }
     return true;
   }else{
