@@ -1,8 +1,14 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav
+  class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5  shadow shadow-sm"
+>
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="login">Quizzo</a>
+    <a routerLink="/home" class="navbar-brand ml-lg-3 me-5">
+      <h1 class="m-0 text-uppercase text-primary">
+        <i class="fa fa-book-reader me-3"></i>Quizzo
+      </h1>
+    </a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler mb-2"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNav"
@@ -12,13 +18,14 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a
             class="nav-link"
             routerLink="login"
-            routerLinkActive="text-decoration-underline text-danger-emphasis "
+            routerLinkActive="text-light text-bg-secondary rounded rounded-2 "
             >Login</a
           >
         </li>
@@ -27,7 +34,7 @@
           <a
             class="nav-link"
             routerLink="register"
-            routerLinkActive="text-decoration-underline text-danger-emphasis "
+            routerLinkActive="text-light text-bg-secondary rounded rounded-2 "
             >Register</a
           >
         </li>
