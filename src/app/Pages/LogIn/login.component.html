@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="login-box">
+    <h1 class="logo">Quizzo</h1>
+
+    <form class="login-form" [formGroup]="loginForm" (submit)="LoginSubmit()">
+      <div class="input-group">
+        <input
+          type="text"
+          id="username"
+          placeholder="Username / Email"
+          formControlName="username"
+        />
+      </div>
+      @if(getUsername.touched){ @if(getUsername.hasError("required")){
+
+      <p class="text-danger error">Username or Email Is Required</p>
+      } @if(getUsername.hasError("minlength")){
+
+      <p class="text-danger error">
+        Username or Email must be greater than 3 characters
+      </p>
+      } }
+
+      <div class="input-group mt-3">
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+      @if(getPassword.touched){ @if(getPassword.hasError("required")){
+
+      <p class="text-danger error">Password Is Required</p>
+      } @if(getPassword.hasError("minlength")){
+
+      <p class="text-danger error">
+        Password must be greater than 7 characters
+      </p>
+      }}
+
+      <button type="submit" class="login-button mt-3">Login</button>
+      <br />
+      <p class="text-light mt-3">
+        Don't have account ? <a routerLink="/register">Register now</a>
+      </p>
+      @if(error){
+
+      <p class="text-danger error">
+        Please check Username / Email and password
+      </p>
+      }
+    </form>
+  </div>
+</div>
