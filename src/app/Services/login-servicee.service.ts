@@ -27,7 +27,7 @@ private readonly router = inject(Router)
 private readonly http = inject(HttpClient);
 // baseURL : string = 'http://studentexam.runasp.net';
 login(login:any):Observable<any>{
-  return this.http.post<any>(`${environment.BaseUrl}/api/Account/login`,login);
+  return this.http.post<any>(`${environment.BaseUrl}api/Account/login`,login);
 }
 getUserToken():void {
   if(localStorage.getItem("userToken")!=null){

@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <h2 class="text-center fw-bold mb-4" style="font-size: 2.2rem; color: #3498db;">All Exams</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+ @for (exam of examData ; track $index) {
+   <div class="col">
+      <div class="card text-center h-100" style="border: 2px solid #3498db; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); background: white; transition: all 0.3s ease;">
+        <div class="card-body py-4 px-3">
+          <h5 class="card-title fw-bold mb-3" style="font-size: 1.5rem; color: #3498db;">{{exam}}</h5>
+          <p class="text-muted mb-4" style="font-size: 1rem;">Exam Duration: 60 Minutes</p>
+          
+          <div class="d-flex justify-content-center gap-3 mt-4">
+            <button class="btn btn-lg px-3" style="background: linear-gradient(90deg, #4b6cb7, #182848); color: white; border: none; border-radius: 50px; box-shadow: 0 4px 8px rgba(75, 108, 183, 0.3); min-width: 100px;">
+              <i class="bi bi-eye-fill me-2"></i>View
+            </button>
+            <button class="btn btn-lg px-3" style="background: linear-gradient(90deg, #ff416c, #ff4b2b); color: white; border: none; border-radius: 50px; box-shadow: 0 4px 8px rgba(255, 65, 108, 0.3); min-width: 100px;">
+              <i class="bi bi-trash-fill me-2"></i>Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+ }
+  </div>
+</div>

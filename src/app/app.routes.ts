@@ -23,7 +23,7 @@ export const routes: Routes = [
  {path:'T',component:TeacherLayoutComponent ,canActivate:[authGuard,TeacherRoleGuard],children:[
         
            {path:"",redirectTo:'home',pathMatch:"full"},
-            {path:'home',component:TeacherHomeComponent},
+           {path:'home',component:TeacherHomeComponent},
         
     ]},
      {path:'S',component:StudentLayoutComponent ,canActivate:[authGuard,StudentRoleGuard],children:[
