@@ -11,6 +11,8 @@ import { StudentRoleGuard } from './Guards/Studentrole.guard';
 import { TeacherRoleGuard } from './Guards/Teacherrole.guard';
 import { TeacherLayoutComponent } from './layouts/teacher-layout/teacher-layout.component';
 import { StudentLayoutComponent } from './layouts/student-layout/student-layout.component';
+import { AddExamComponent } from './Components/Teacher/add-exam/add-exam.component';
+import { ShowAllExamsComponent } from './Components/Teacher/show-all-exams/show-all-exams.component';
 
 export const routes: Routes = [
     { path:'',component:AuthLayoutComponent,canActivate:[antiAuthGuard],children:[
@@ -20,16 +22,22 @@ export const routes: Routes = [
     ]},
 
     
- {path:'T',component:TeacherLayoutComponent ,canActivate:[authGuard,TeacherRoleGuard],children:[
+   {path:'T',component:TeacherLayoutComponent ,canActivate:[authGuard,TeacherRoleGuard],children:[
         
            {path:"",redirectTo:'home',pathMatch:"full"},
-           {path:'home',component:TeacherHomeComponent},
-        
+           {path:'home',component:TeacherHomeComponent,title:'Home'},
+           {path:'AddExam',component:AddExamComponent,title:'Add Exam'},
+           {path:'ShowExams',component:ShowAllExamsComponent,title:'Show Exams'},
+           { path: '**', component: NotFoundComponent ,title:'Error'}
+
     ]},
+
      {path:'S',component:StudentLayoutComponent ,canActivate:[authGuard,StudentRoleGuard],children:[
         
            {path:"",redirectTo:'home',pathMatch:"full"},
-            {path:'home',component:StudentHomeComponent},
+           {path:'home',component:StudentHomeComponent},
+           { path: '**', component: NotFoundComponent ,title:'Error'}
+
         
     ]},
    

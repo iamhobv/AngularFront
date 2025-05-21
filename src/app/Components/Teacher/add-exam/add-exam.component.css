@@ -1,0 +1,49 @@
+.custom-container {
+  background-color: #f4faff;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.exam-info {
+  background-color: #eaf6fd;
+  border: 2px solid #3498db;
+}
+
+.question-form {
+  background-color: #ffffff;
+  border-left: 5px solid #3498db;
+  border-radius: 8px;
+}
+
+.section-title {
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.btn-add-question {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.btn-add-question:hover {
+  background-color: #2980b9;
+}
+
+.btn-save {
+  background-color: #2ecc71;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background-color: #27ae60;
+}

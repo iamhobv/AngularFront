@@ -15,4 +15,7 @@ export class ShowExamsToTeacherService {
     return this._HttpClient.get(`${environment.BaseUrl}api/Exam`)
    } 
 
+   deleteExam(id:number):Observable<any>{
+    return this._HttpClient.delete(`${environment.BaseUrl}api/Exam/${id}`)
+   }
 }

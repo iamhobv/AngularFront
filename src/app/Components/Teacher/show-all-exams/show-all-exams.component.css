@@ -1,0 +1,18 @@
+.delete-btn {
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  box-shadow: 0 4px 8px rgba(255, 65, 108, 0.3);
+  min-width: 100px;
+  transition: all 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(90deg, #ff4b2b, #ff416c); /* Reverse gradient */
+  box-shadow: 0 6px 12px rgba(255, 65, 108, 0.5);
+  transform: scale(1.05);
+  cursor: pointer;
+}
