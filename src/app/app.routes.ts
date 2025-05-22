@@ -11,8 +11,12 @@ import { StudentRoleGuard } from './Guards/Studentrole.guard';
 import { TeacherRoleGuard } from './Guards/Teacherrole.guard';
 import { TeacherLayoutComponent } from './layouts/teacher-layout/teacher-layout.component';
 import { StudentLayoutComponent } from './layouts/student-layout/student-layout.component';
+
 import { AddExamComponent } from './Components/Teacher/add-exam/add-exam.component';
 import { ShowAllExamsComponent } from './Components/Teacher/show-all-exams/show-all-exams.component';
+
+import { ViewResultComponent } from './Components/Stuent/view-result/view-result.component';
+
 
 export const routes: Routes = [
     { path:'',component:AuthLayoutComponent,canActivate:[antiAuthGuard],children:[
@@ -40,6 +44,9 @@ export const routes: Routes = [
 
         
     ]},
+    {
+        path:'ViewResult',component:ViewResultComponent
+    },
    
     {path:'**',component:NotFoundComponent}
 ];
