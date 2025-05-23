@@ -97,7 +97,7 @@ export class StudentTakeExamComponent implements OnDestroy {
           this.remainingTime = `${this.pad(minutes)}:${this.pad(
             remainingSeconds
           )}`;
-          console.log(this.remainingTime);
+          // console.log(this.remainingTime);
           if (this.remainingTime == '00:00') {
             console.log("Time's up!");
             this.submitOnTimeout();
@@ -152,12 +152,13 @@ export class StudentTakeExamComponent implements OnDestroy {
     console.log(JSON.stringify(payload));
     this._StudentService.submitExamAnswers(payload).subscribe({
       next: (res) => {
-        // alert(`Exam submitted successfully! ${res}`);
-        // console.log(.);
-        if (res.Data == 'This student take tgis exam before') {
+        if (res.isPass) {
           this.router.navigate(['/S/home']);
-          prompt('This student take tgis exam before');
+          confirm('Your answer has been submitted successfully');
+        } else {
+          confirm('something went wrong');
         }
+
         // Optionally navigate away or show result
       },
       error: (err) => {
@@ -189,10 +190,12 @@ export class StudentTakeExamComponent implements OnDestroy {
       next: (res) => {
         // alert(`Exam submitted successfully! ${res}`);
         // console.log(.);
-        console.log(res);
-        if (res.Data == 'This student take this exam before') {
+        console.log(res.isPass);
+        if (res.isPass) {
           this.router.navigate(['/S/home']);
-          prompt('This student take this exam before');
+          confirm('Your answer has been submitted successfully');
+        } else {
+          confirm('something went wrong');
         }
         // Optionally navigate away or show result
       },
