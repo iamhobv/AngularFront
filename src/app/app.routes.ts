@@ -16,6 +16,7 @@ import { AddExamComponent } from './Components/Teacher/add-exam/add-exam.compone
 import { ShowAllExamsComponent } from './Components/Teacher/show-all-exams/show-all-exams.component';
 
 import { ViewResultComponent } from './Components/Stuent/view-result/view-result.component';
+import { StudentTakeExamComponent } from './Pages/student-take-exam/student-take-exam.component';
 
 
 export const routes: Routes = [
@@ -40,6 +41,9 @@ export const routes: Routes = [
         
            {path:"",redirectTo:'home',pathMatch:"full"},
            {path:'home',component:StudentHomeComponent},
+           {path:'takeExam/:examId',component:StudentTakeExamComponent},
+
+        //    {path:'home',component:StudentHomeComponent},
            { path: '**', component: NotFoundComponent ,title:'Error'}
 
         

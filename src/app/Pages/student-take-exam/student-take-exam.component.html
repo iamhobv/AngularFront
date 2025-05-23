@@ -1,0 +1,110 @@
+<p>student-take-exam works!</p>
+
+<div class="d-flex justify-content-end sticky-top">
+  <div class="count_box rounded-pill d-flex me-5">
+    <div class="count_clock ps-2">
+      <img src="../../../assests/clock.png" alt="image_not_found" />
+    </div>
+    <div class="count_title px-1">
+      <h4 class="pe-5">{{ exam?.examTitle }}</h4>
+      <!-- <span>Time start</span> -->
+    </div>
+    <div
+      class="count_number rounded-pill bg-white overflow-hidden me-2 text-center countdown_timer"
+      data-countdown="2022/10/24"
+    >
+      <h3>{{ remainingTime }}</h3>
+      <!-- <span class="text-uppercase">sec</span> -->
+    </div>
+  </div>
+</div>
+
+<br />
+<div class="mx-5">
+  @for (question of exam?.questions; track question.questionId;let i = $index;)
+  {
+
+  <div class="active border border-1 rounded mb-5 p-3" style="display: block">
+    <!-- Form-content -->
+    <div class="d-flex flex-column float-end">
+      <span class="text-uppercase"
+        >QUESTION {{ $index + 1 }}/{{ examQuestionCount }}
+      </span>
+
+      <span class="text-uppercase">
+        Grade : <strong>{{ question.questionMark }}</strong> marks
+      </span>
+    </div>
+
+    <h5
+      class="question_title px-5 py-3 animate__animated animate__fadeInRight animate_25ms"
+    >
+      {{ question.questionBody }}
+    </h5>
+    <div class="form_items ps-5">
+      <ul class="list-unstyled p-0">
+        @if(question.questionType==1) { @for (MCQ of question.options; track
+        $index;let j = $index) {
+
+        <!-- {{
+          question.selectedOption
+        }} -->
+        <li
+          class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+          [ngClass]="{ 'selected-option': question.selectedOption === MCQ }"
+        >
+          <input
+            type="radio"
+            [id]="'opt_' + i + '_' + j"
+            [name]="'question_' + i"
+            [value]="MCQ"
+            [(ngModel)]="question.selectedOption"
+            style="z-index: 1000"
+          />
+          <label [for]="'opt_' + i + '_' + j" class="w-100">{{ MCQ }}</label>
+        </li>
+        }}@else if (question.questionType==2) {
+
+        <!-- {{
+          question.selectedOption
+        }} -->
+        <li
+          class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+          [ngClass]="{ 'selected-option': question.selectedOption === true }"
+        >
+          <input
+            type="radio"
+            [id]="'opt_' + i + '_' + 1"
+            [name]="'question_' + i"
+            [value]="true"
+            [(ngModel)]="question.selectedOption"
+            style="z-index: 1000"
+          />
+          <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
+        </li>
+
+        <!-- {{
+          question.selectedOption
+        }} -->
+        <li
+          class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+          [ngClass]="{ 'selected-option': question.selectedOption === false }"
+        >
+          <input
+            type="radio"
+            [id]="'opt_' + i + '_' + 2"
+            [name]="'question_' + i"
+            [value]="false"
+            [(ngModel)]="question.selectedOption"
+            style="z-index: 1000"
+          />
+          <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
+        </li>
+
+        }
+      </ul>
+    </div>
+  </div>
+  }
+  <button class="btn btn-primary" (click)="submitAnswers()">Submit Exam</button>
+</div>

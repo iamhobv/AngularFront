@@ -3,92 +3,88 @@ import { ILogin } from './../../Models/ilogin';
 import { LoginService } from './../../Services/login-servicee.service';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule,CommonModule,HttpClientModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
-export class LoginComponent   {
+export class LoginComponent {
+  loginForm = new FormGroup({
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+  });
+  /**
+   *
+   */
+  constructor(private loginService: LoginService) {}
 
-
-
-
-
-loginForm = new FormGroup({
-  username:new FormControl("",[Validators.required,Validators.minLength(3)]),
-  password:new FormControl("",[Validators.required,Validators.minLength(8)]),
-})
-/**
- *
- */
-constructor( private loginService:LoginService ) {
-
-  
-}
-  
-
-get getUsername() {
+  get getUsername() {
     return this.loginForm.controls['username'];
   }
-get getPassword() {
+  get getPassword() {
     return this.loginForm.controls['password'];
   }
-  
-mb20px:boolean = true;
-error:boolean = false;
+
+  mb20px: boolean = true;
+  error: boolean = false;
   private readonly router = inject(Router);
 
-LoginSubmit(){
-if(this.loginForm.status=="VALID"){
+  LoginSubmit() {
+    if (this.loginForm.status == 'VALID') {
+      console.log('clicked');
+      const loginCred = { username: '', password: '' } as ILogin;
+      loginCred.username = this.loginForm.value.username ?? '';
+      loginCred.password = this.loginForm.value.password ?? '';
 
-  console.log("clicked");
-  const loginCred = {username:"",password:""} as ILogin; 
-  loginCred.username = this.loginForm.value.username ?? "";
-  loginCred.password = this.loginForm.value.password ?? "";
+      this.loginService.login(loginCred).subscribe({
+        next: (result) => {
+          console.log('logged in ');
+          // console.log(result);
+          setTimeout(() => {
+            console.log(result.data.token);
+            localStorage.setItem('userToken', result.data.token);
 
-  this.loginService.login(loginCred).subscribe({
-    next:(result)=>{
-      console.log("logged in ");
-      // console.log(result);
-       setTimeout(() => {
-console.log(result.data.token);
-        localStorage.setItem("userToken",result.data.token)
-  
-/**  this.userName=this.userToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
+            /**  this.userName=this.userToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
     this.userId=this.userToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]
     this.userRole=this.userToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
  */
-this.loginService.getUserToken();
+            this.loginService.getUserToken();
 
-          if(localStorage.getItem("userRole")=="Student"){
-
-            this.router.navigate(["/S/home"])
-          }else if(localStorage.getItem("userRole")=="Teacher"){
-            this.router.navigate(["/T/home"])
+            if (localStorage.getItem('userRole') == 'Student') {
+              this.router.navigate(['/S/home']);
+            } else if (localStorage.getItem('userRole')?.includes('Teacher')) {
+              this.router.navigate(['/T/home']);
+            }
+          }, 1000);
+          if (result.isPass == false) {
+            this.error = true;
           }
-        }, 1000);
-      if(result.isPass == false){
-          this.error=true;
-      }
-    },
-    error:(e)=>{
-      console.log("error");
-      console.log(e);
+        },
+        error: (e) => {
+          console.log('error');
+          console.log(e);
+        },
+      });
+      this.error = false;
+    } else {
+      console.log('Error');
+      this.error = true;
     }
-  })
-  this.error=false;
-}else{
-  
-  console.log("Error");
-  this.error=true;
-}
-
-}
-
-
-
+  }
 }
