@@ -164,6 +164,10 @@ h1 {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+ul.list-unstyled li.selected-option {
+  background: #2193b0 !important;
+  color: #fff !important;
+}
 .form_items li.active {
   background-color: #e9e9e9;
 }
