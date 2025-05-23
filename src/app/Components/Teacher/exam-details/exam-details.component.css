@@ -1,0 +1,27 @@
+.custom-hover-btn {
+  background: linear-gradient(90deg, #4b6cb7, #182848);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(75, 108, 183, 0.4);
+  transition: all 0.3s ease;
+}
+
+.custom-hover-btn:hover {
+  background: linear-gradient(90deg, #182848, #4b6cb7);
+  box-shadow: 0 6px 16px rgba(75, 108, 183, 0.6);
+  transform: scale(1.05);
+}
+
+.custom-header {
+  background-color: #182848 ;
+  color: white ;
+}
+.custom-header th {
+  background-color: #182848 ;
+  color: white ;
+}
+
+.title{
+  color:#182848;
+}

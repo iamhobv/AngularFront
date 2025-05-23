@@ -14,6 +14,7 @@ import { StudentLayoutComponent } from './layouts/student-layout/student-layout.
 
 import { AddExamComponent } from './Components/Teacher/add-exam/add-exam.component';
 import { ShowAllExamsComponent } from './Components/Teacher/show-all-exams/show-all-exams.component';
+import { ExamDetailsComponent } from './Components/Teacher/exam-details/exam-details.component';
 
 import { ViewResultComponent } from './Components/Stuent/view-result/view-result.component';
 import { StudentTakeExamComponent } from './Pages/student-take-exam/student-take-exam.component';
@@ -33,6 +34,8 @@ export const routes: Routes = [
            {path:'home',component:TeacherHomeComponent,title:'Home'},
            {path:'AddExam',component:AddExamComponent,title:'Add Exam'},
            {path:'ShowExams',component:ShowAllExamsComponent,title:'Show Exams'},
+           {path:'ShowExamDetails/:id',component:ExamDetailsComponent,title:'Show Exams Details'},
+
            { path: '**', component: NotFoundComponent ,title:'Error'}
 
     ]},

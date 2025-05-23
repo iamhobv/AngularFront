@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-bold title">{{ examData.examTitle }}</h1>
+    <p class="fs-5 text-secondary">Total Students: <span class="fw-semibold">{{ examData.totalStudents }}</span></p>
+  </div>
+
+  <div class="card border-0 shadow-lg rounded-4">
+    <div class="card-body p-4">
+      @if (examData.studentResults.length > 0) {
+        <div class="table-responsive">
+          <table class="table table-hover align-middle text-center table-bordered">
+           <thead class="custom-header">
+  <tr>
+    <th> </th>
+    <th>Student Name</th>
+    <th>Start Time</th>
+    <th>Submitted At</th>
+    <th>Time Taken</th>
+    <th>Score</th>
+  </tr>
+</thead>
+            <tbody>
+              @for (examResult of examData.studentResults; track $index) {
+                <tr>
+                  <td class="fw-bold text-muted">{{ $index + 1 }}</td>
+                  <td>{{ examResult.studentName }}</td>
+                  <td>{{ formatDate(examResult.startedAt) }}</td>
+                  <td>{{ formatDate(examResult.submittedAt) }}</td>
+                  <td>{{ getDuration(examResult.startedAt, examResult.submittedAt) }}</td>
+                  <td>
+                    <span class="badge fs-6 px-3 py-2 rounded-pill"
+                          style="background-color: #182848; color: white;">
+                      {{ examResult.totalScore }}
+                    </span>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      } @else {
+        <div class="alert alert-info text-center fs-5 mb-0">
+          No results for this exam.
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-5">
+    <button [routerLink]="['/T/home']" routerLinkActive="router-link-active"
+            class="btn btn-lg px-4 py-2 custom-hover-btn">
+      <i class="bi bi-arrow-left-circle-fill me-2"></i>Back To Home
+    </button>
+  </div>
+</div>

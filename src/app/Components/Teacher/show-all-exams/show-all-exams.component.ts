@@ -14,8 +14,10 @@ export class ShowAllExamsComponent implements OnInit{
 
   examData:IShowExamsToTeacher[]=[]
    
-  constructor(private _ShowExamsToTeacherService :ShowExamsToTeacherService){
-  }
+  constructor(
+    private _ShowExamsToTeacherService :ShowExamsToTeacherService
+  )
+  {}
 
 ngOnInit(): void {
   this._ShowExamsToTeacherService.GetExams().subscribe({
