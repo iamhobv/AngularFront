@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../Services/student.service';
-
 import { IShowExamsToTeacher } from '../../../Models/ishow-exams-to-teacher';
-
 import { RouterLink } from '@angular/router';
 
 @Component({

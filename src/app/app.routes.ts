@@ -17,11 +17,9 @@ import { ShowAllExamsComponent } from './Components/Teacher/show-all-exams/show-
 import { ExamDetailsComponent } from './Components/Teacher/exam-details/exam-details.component';
 
 import { ViewResultComponent } from './Components/Stuent/view-result/view-result.component';
-
-import { StudentTakeExamComponent } from './Pages/student-take-exam/student-take-exam.component';
 import { StudentAvailableExamsComponent } from './Components/Stuent/student-available-exams/student-available-exams.component';
 import { StudentExamComponent } from './Components/Stuent/student-exam/student-exam.component';
-
+import { StudentTakeExamComponent } from './Pages/student-take-exam/student-take-exam.component';
 
 
 export const routes: Routes = [
@@ -52,6 +50,7 @@ export const routes: Routes = [
 
            {path:'availableExams',component:StudentAvailableExamsComponent,title:'Available Exams'},
            {path:'ViewResult/:examId',component:ViewResultComponent,title:'Result'},
+
            { path: '**', component: NotFoundComponent ,title:'Error'}
 
         
