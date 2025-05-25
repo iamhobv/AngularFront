@@ -1,10 +1,10 @@
+import { QuestionType } from "./question-type";
+
 export interface ICreateQuestions {
      questionBody: string,
-     questionType: 1,
-     questionMark: 0,
+     questionType: QuestionType,
+     questionMark: number,
      correctAnswer: string,
-     options: [
-       string
-  ]
+     options: string[];
 }
 
