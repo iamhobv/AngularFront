@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { LoginService } from '../../Services/login-servicee.service';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-student-nav',
-  imports: [],
+  imports: [RouterLinkActive,RouterLink],
   templateUrl: './student-nav.component.html',
   styleUrl: './student-nav.component.css'
 })

@@ -2,26 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../Services/student.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-view-result',
-  imports: [],
+  imports: [FormsModule,CommonModule],
   templateUrl: './view-result.component.html',
   styleUrl: './view-result.component.css'
 })
 export class ViewResultComponent implements OnInit {
 
-  result:object[]=[];
+  exam:any;
   examId:any;
   studentId:any;
+  examQuestionCount!:Number;
   constructor(private _studentService:StudentService,private activatedRoute:ActivatedRoute)
   {}
   ngOnInit(): void {
     this.examId = this.activatedRoute.snapshot.paramMap.get("examId");
-    this.studentId = this.activatedRoute.snapshot.paramMap.get("studentId");
+    this.studentId = localStorage.getItem('userId');
+    console.log(this.examId);
+    console.log(this.studentId);
     this._studentService.ViewResult(this.examId,this.studentId).subscribe({
       next:(res)=>{
-        this.result = res.Data;
+        this.exam = res.data;
+        this.examQuestionCount = this.exam.questions.length
       },
       error:(err)=>{
         console.log(err);

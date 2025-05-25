@@ -18,8 +18,9 @@ export class StudentService {
 
   ViewResult(examId: any, studentId: any): Observable<any> {
     return this.HttpClient.get(
-      `${environment.BaseUrl}api/viewResult/${examId}/${studentId}`
+      `${environment.BaseUrl}api/Student/viewResult/${examId}/${studentId}`
     );
+
   }
 
   GetExam(examId: number): Observable<any> {

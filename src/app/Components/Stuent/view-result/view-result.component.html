@@ -1,1 +1,95 @@
 <p>view-result works!</p>
+<h2></h2>
+<div class="d-flex justify-content-end ">
+    <div class="count_box rounded-pill d-flex me-5">
+        <div class="count_title px-1">
+            <h4 class="pe-5">{{ exam.title }}</h4>
+            <!-- <span>Time start</span> -->
+        </div>
+        <div class="count_number rounded-pill bg-white overflow-hidden me-2 text-center countdown_timer"
+            data-countdown="2022/10/24">
+            <h3>score: {{ exam.totalScore }}</h3>
+            <!-- <span class="text-uppercase">sec</span> -->
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="mx-5">
+    @for (question of exam?.questions; track question.questionId;let i = $index;)
+    {
+
+    <div class="active border border-1 rounded mb-5 p-3" style="display: block">
+        <!-- Form-content -->
+        <div class="d-flex flex-column float-end">
+            <span class="text-uppercase">QUESTION {{ $index + 1 }}/{{ examQuestionCount }}
+            </span>
+
+            <span class="text-uppercase">
+                Grade : <strong>{{ question.questionMark }}</strong> marks
+            </span>
+        </div>
+
+        <h5 class="question_title px-5 py-3 animate__animated animate__fadeInRight animate_25ms">
+            {{ question.questionBody }}
+        </h5>
+        <div class="form_items ps-5">
+            <ul class="list-unstyled p-0">
+                @if(question.questionType==1) { @for (MCQ of question.options; track
+                $index;let j = $index) {
+
+                <!-- {{
+          question.selectedOption
+        }} -->
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color': MCQ === question.correctAnswer ? '#2193b0' : 
+                                        (MCQ === question.studentQuestionAnswer ? 'red' : ''),
+                    'color': (MCQ === question.correctAnswer || MCQ === question.studentQuestionAnswer) ? 'white' : ''
+                    }">
+
+                    <label [for]="'opt_' + i + '_' + j" class="w-100">{{ MCQ }}</label>
+                </li>
+
+
+                }}@else if (question.questionType==2) {
+
+                <!-- {{
+          question.selectedOption
+        }} -->
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                     [ngStyle]="{
+                    'background-color': question.studentQuestionAnswer === question.correctAnswer ? '#2193b0' : 'red'
+                    }">
+                    
+                    <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
+                </li>
+
+                <!-- {{
+          question.selectedOption
+        }} -->
+
+        @if(question.studentQuestionAnswer !== question.correctAnswer)
+        {
+            <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                   [ngStyle]="{
+                    'background-color': (question.studentQuestionAnswer !== question.correctAnswer) ? '#2193b0' : 'red'
+                    }">
+                    
+                    <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
+                </li>
+        }@else{
+            <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms">
+                    
+                    <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
+                </li>
+        }
+                
+
+                }
+            </ul>
+        </div>
+    </div>
+    }
+    <!-- <button class="btn btn-primary" (click)="submitAnswers()">Submit Exam</button> -->
+</div>
