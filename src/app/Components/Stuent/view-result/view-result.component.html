@@ -57,34 +57,81 @@
                 <!-- {{
           question.selectedOption
         }} -->
-                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
-                     [ngStyle]="{
-                    'background-color': question.studentQuestionAnswer === question.correctAnswer ? '#2193b0' : 'red'
-                    }">
-                    
-                    <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
-                </li>
+
 
                 <!-- {{
           question.selectedOption
         }} -->
 
-        @if(question.studentQuestionAnswer !== question.correctAnswer)
-        {
-            <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
-                   [ngStyle]="{
-                    'background-color': (question.studentQuestionAnswer !== question.correctAnswer) ? '#2193b0' : 'red'
+                @if(question.studentQuestionAnswer?.toLowerCase() == question.correctAnswer?.toLowerCase() && question.correctAnswer?.toLowerCase() == "true" )
+                {
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color':'#2193b0'
                     }">
-                    
+
+                    <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
+                </li>
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms">
+
                     <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
                 </li>
-        }@else{
-            <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms">
-                    
+                }@else if(question.studentQuestionAnswer?.toLowerCase() == question.correctAnswer?.toLowerCase() && question.correctAnswer?.toLowerCase() == "false"){
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms">
+
+                    <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
+                </li>
+
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color': '#2193b0'
+                    }">
                     <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
                 </li>
-        }
-                
+
+                }@else if(question.studentQuestionAnswer?.toLowerCase() != question.correctAnswer?.toLowerCase() && question.correctAnswer?.toLowerCase() == "true"){
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color':'#2193b0'
+                    }">
+
+                    <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
+                </li>
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color': 'red'
+                    }">
+                    <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
+                </li>
+
+                }@else if(question.studentQuestionAnswer?.toLowerCase() != question.correctAnswer?.toLowerCase() && question.correctAnswer?.toLowerCase() == "false"){
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color':'red'
+                    }">
+
+                    <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
+                </li>
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color': '#2193b0'
+                    }">
+                    <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
+                </li>
+                }@else
+                {
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms">
+
+                    <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
+                </li>
+
+
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms">
+                    <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
+                </li>
+                }
+
+
 
                 }
             </ul>

@@ -22,11 +22,10 @@ export class ViewResultComponent implements OnInit {
   ngOnInit(): void {
     this.examId = this.activatedRoute.snapshot.paramMap.get("examId");
     this.studentId = localStorage.getItem('userId');
-    console.log(this.examId);
-    console.log(this.studentId);
     this._studentService.ViewResult(this.examId,this.studentId).subscribe({
       next:(res)=>{
         this.exam = res.data;
+        console.log(this.exam)
         this.examQuestionCount = this.exam.questions.length
       },
       error:(err)=>{

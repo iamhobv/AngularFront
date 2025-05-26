@@ -24,6 +24,7 @@ export class StudentAvailableExamsComponent implements OnInit {
       next: (res) => {
         // this.examData = res.data;
         this.studentId = localStorage.getItem('userId');
+        
         res.data.forEach((element: IShowExamsToTeacher) => {
           this._StudentService.CheckStdExam(element.id, this.studentId).subscribe({
             next: (result) => {
