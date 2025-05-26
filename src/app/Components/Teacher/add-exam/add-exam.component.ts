@@ -3,13 +3,13 @@ import { routes } from './../../../app.routes';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ICreateQuestions } from '../../../Models/icreate-questions';
 import { AddExamService } from '../../../Services/add-exam.service';
 
 @Component({
   selector: 'app-add-exam',
-  imports: [ReactiveFormsModule, CommonModule,FormsModule],
+  imports: [ReactiveFormsModule, CommonModule,FormsModule,RouterLink],
   templateUrl: './add-exam.component.html',
   styleUrl: './add-exam.component.css'
 })
@@ -17,7 +17,7 @@ export class AddExamComponent {
 
   questionType = QuestionType;
   hours: number = 0;
- minutes: number = 0;
+  minutes: number = 0;
 
   questions: ICreateQuestions[] = [];
   questionIDs: number[] = [];

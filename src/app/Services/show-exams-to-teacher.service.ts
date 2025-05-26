@@ -14,8 +14,6 @@ export class ShowExamsToTeacherService {
    GetExams():Observable<any>{
     return this._HttpClient.get(`${environment.BaseUrl}api/Exam`)
    } 
-
-   
    GetExamById(id:number):Observable<any>{
     return this._HttpClient.get(`${environment.BaseUrl}api/Exam/results/${id}`)
    }
@@ -24,9 +22,4 @@ export class ShowExamsToTeacherService {
     return this._HttpClient.delete(`${environment.BaseUrl}api/Exam/${id}`)
    }
 
-
-
-  //  EditExam(ExamId:number,Exam:any):Observable<any>{
-  //   return this._HttpClient.put(`${environment.BaseUrl}api/Exam/${ExamId}`,Exam)
-  //  }
 }

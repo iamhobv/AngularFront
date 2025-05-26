@@ -1,18 +1,16 @@
-<p>view-result works!</p>
 <h2></h2>
 <div class="d-flex justify-content-end ">
     <div class="count_box rounded-pill d-flex me-5">
         <div class="count_title px-1">
             <h4 class="pe-5">{{ exam.title }}</h4>
-            <!-- <span>Time start</span> -->
         </div>
         <div class="count_number rounded-pill bg-white overflow-hidden me-2 text-center countdown_timer"
             data-countdown="2022/10/24">
             <h3>score: {{ exam.totalScore }}</h3>
-            <!-- <span class="text-uppercase">sec</span> -->
         </div>
     </div>
 </div>
+
 
 <br />
 <div class="mx-5">
@@ -59,10 +57,19 @@
         }} -->
 
 
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color': question.studentQuestionAnswer === question.correctAnswer ? '#2193b0' : 'red'
+                    }">
+
+                    <label [for]="'opt_' + i + '_' + 1" class="w-100">true</label>
+                </li>
+
                 <!-- {{
           question.selectedOption
         }} -->
-
+<!-- 
+<<<<<<< Updated upstream
                 @if(question.studentQuestionAnswer?.toLowerCase() == question.correctAnswer?.toLowerCase() && question.correctAnswer?.toLowerCase() == "true" )
                 {
                 <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
@@ -132,6 +139,24 @@
                 }
 
 
+======= -->
+                @if(question.studentQuestionAnswer !== question.correctAnswer)
+                {
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms"
+                    [ngStyle]="{
+                    'background-color': (question.studentQuestionAnswer !== question.correctAnswer) ? '#2193b0' : 'red'
+                    }">
+
+                    <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
+                </li>
+                }@else{
+                <li class="active step_1 ps-5 rounded-pill animate__animated animate__fadeInRight animate_50ms">
+
+                    <label [for]="'opt_' + i + '_' + 2" class="w-100">false</label>
+                </li>
+                }
+
+>>>>>>> Stashed changes
 
                 }
             </ul>
@@ -139,4 +164,12 @@
     </div>
     }
     <!-- <button class="btn btn-primary" (click)="submitAnswers()">Submit Exam</button> -->
+</div>
+
+
+<div class="text-center mt-4">
+  <a [routerLink]="['/S/home']" class="btn btn-lg px-3"
+    style="background: linear-gradient(90deg, #4b6cb7, #182848); color: white; border: none; border-radius: 50px; box-shadow: 0 4px 8px rgba(75, 108, 183, 0.3); min-width: 100px;">
+    <i class="bi bi-arrow-left-circle-fill me-2"></i>Back To Home
+  </a>
 </div>

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../Services/student.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-view-result',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,RouterLink],
   templateUrl: './view-result.component.html',
   styleUrl: './view-result.component.css'
 })

@@ -1,0 +1,205 @@
+<div class="exam-creator-container">
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Exam Form Card -->
+        <div class="card shadow-lg border-0 mb-4">
+          <div class="card-header exam-creator-header">
+            <h3 class="mb-0"><i class="bi bi-file-earmark-text me-2"></i>Edit Exam</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="examForm">
+              <div class="mb-4">
+                <label for="title" class="form-label fw-semibold">Exam Title</label>
+                <input id="title" type="text" formControlName="title" class="form-control form-control-lg" 
+                       placeholder="Enter exam title">
+                @if (getTitle.touched && getTitle.hasError('required')) {
+                <div class="invalid-feedback d-block">
+                  <i class="bi bi-exclamation-circle me-1"></i>Title is required
+                </div>
+                }
+              </div>
+
+              <div class="mb-4">
+                <label for="duration" class="form-label fw-semibold">Duration</label>
+                <input id="duration" type="text" formControlName="duration" class="form-control" 
+                       placeholder="HH:MM:SS (e.g., 01:30:00)">
+                @if (getDuration.touched) { 
+                  @if (getDuration.hasError('required')) {
+                  <div class="invalid-feedback d-block">
+                    <i class="bi bi-exclamation-circle me-1"></i>Duration is required
+                  </div>
+                  } 
+                  @if (getDuration.hasError('pattern')) {
+                  <div class="invalid-feedback d-block">
+                    <i class="bi bi-exclamation-circle me-1"></i>Format must be HH:MM:SS
+                  </div>
+                  }
+                }
+              </div>
+
+              <div class="questions-section mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="fw-semibold mb-0"><i class="bi bi-question-circle me-2"></i>Exam Questions</h4>
+                  <button type="button" class="btn btn-add-question" (click)="toggleAddQuestionForm()">
+                    <i class="bi bi-plus-lg me-1"></i>
+                    {{ showAddQuestionForm ? 'Hide Question Form' : 'Add New Question' }}
+                  </button>
+                </div>
+
+                @for (question of questionsArray.controls; track question.value.id; let i = $index) {
+                <div class="question-item card mb-3">
+                  <div class="card-body">
+                    <div class="question-header d-flex justify-content-between align-items-center mb-2">
+                      <h5 class="mb-0">{{i + 1}}. {{question.value.body}}</h5>
+                      <span class="badge" [ngClass]="question.value.type === 1 ? 'bg-primary' : 'bg-info'">
+                        {{question.value.type === 1 ? 'MCQ' : 'True/False'}}
+                      </span>
+                    </div>
+
+                    @if (question.value.type === 1) {
+                    <div class="options-list mb-3">
+                      <h6 class="fw-semibold">Options:</h6>
+                      <ul class="list-group">
+                        @for (option of question.value.options; track option) {
+                        <li class="list-group-item">{{option}}</li>
+                        }
+                      </ul>
+                    </div>
+                    }
+                    
+                    <div class="question-details d-flex justify-content-between align-items-center">
+                      <span class="badge bg-secondary">Mark: {{question.value.mark}}</span>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="removeQuestion(i)">
+                        <i class="bi bi-trash me-1"></i>Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                } @empty {
+                <div class="alert alert-info">
+                  <i class="bi bi-info-circle me-2"></i>No questions in this exam
+                </div>
+                }
+              </div>
+
+              <div class="form-actions d-flex justify-content-between">
+                <button type="button" (click)="saveExam()" [disabled]="examForm.invalid" class="btn btn-save-exam">
+                  <i class="bi bi-save me-2"></i>Save Changes
+                </button>
+                
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Add Question Card - Conditionally Shown -->
+        @if (showAddQuestionForm) {
+        <div class="card shadow-lg border-0 mt-4">
+          <div class="card-header question-creator-header">
+            <h3 class="mb-0"><i class=" bi bi-plus-circle-dotted me-2 "></i>Add New Question</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="QuestionForm">
+              <!-- Question Body -->
+              <div class="mb-3">
+                <label for="questionBody" class="form-label fw-semibold">Question</label>
+                <textarea id="questionBody" class="form-control" formControlName="questionBody" rows="3"
+                  placeholder="Enter the question text"></textarea>
+                @if (QuestionForm.get('questionBody')?.invalid && QuestionForm.get('questionBody')?.touched) {
+                <div class="invalid-feedback d-block">
+                  <i class="bi bi-exclamation-circle me-1"></i>Question text is required
+                </div>
+                }
+              </div>
+
+              <!-- Question Type -->
+              <div class="mb-3">
+                <label for="questionType" class="form-label fw-semibold">Question Type</label>
+                <select id="questionType" class="form-select" formControlName="questionType"
+                  (change)="onQuestionTypeChange()">
+                  <option [ngValue]="questionType.MultipleChoice">Multiple Choice</option>
+                  <option [ngValue]="questionType.TrueFalse">True / False</option>
+                </select>
+              </div>
+
+              <!-- MCQ Options -->
+              @if (QuestionForm.value.questionType === questionType.MultipleChoice) {
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Options</label>
+                <div class="options-container mb-2">
+                  @for (option of options.controls; track $index) {
+                  <div class="input-group mb-2">
+                    <span class="input-group-text option-number">{{ $index + 1 }}.</span>
+<input [formControl]="$any(option)" class="form-control" placeholder="Option {{ $index + 1 }}">                    @if (options.length > 2) {
+                    <button type="button" (click)="removeOption($index)" class="btn btn-outline-danger">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                    }
+                  </div>
+                  }
+                </div>
+                <button type="button" (click)="addOption()" class="btn btn-add-question btn-outline-primary">
+                  <i class="bi bi-plus-circle me-1"></i>Add Option
+                </button>
+              </div>
+
+              <div class="mb-3">
+                <label for="correctAnswerMCQ" class="form-label fw-semibold">Correct Answer</label>
+                <input type="text" id="correctAnswerMCQ" class="form-control" formControlName="correctAnswer"
+                  placeholder="Enter the correct answer">
+                @if (QuestionForm.get('correctAnswer')?.invalid && QuestionForm.get('correctAnswer')?.touched) {
+                <div class="invalid-feedback d-block">
+                  <i class="bi bi-exclamation-circle me-1"></i>Correct answer is required
+                </div>
+                }
+              </div>
+              }
+
+              <!-- True/False Options -->
+              @if (QuestionForm.value.questionType === questionType.TrueFalse) {
+              <div class="mb-3">
+                <label for="correctAnswerTF" class="form-label fw-semibold">Correct Answer</label>
+                <select id="correctAnswerTF" class="form-select" formControlName="correctAnswer">
+                  <option value="True">True</option>
+                  <option value="False">False</option>
+                </select>
+              </div>
+              }
+
+              <!-- Question Mark -->
+              <div class="mb-4">
+                <label for="questionMark" class="form-label fw-semibold">Points</label>
+                <input type="number" id="questionMark" class="form-control" formControlName="questionMark" min="1"
+                  placeholder="Enter points">
+                @if (QuestionForm.get('questionMark')?.invalid && QuestionForm.get('questionMark')?.touched) {
+                <div class="invalid-feedback d-block">
+                  <i class="bi bi-exclamation-circle me-1"></i>Points must be at least 1
+                </div>
+                }
+              </div>
+
+              <!-- Submit Button -->
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" (click)="toggleAddQuestionForm()" class="btn btn-secondary">
+                  Cancel
+                </button>
+                <button type="button" (click)="AddQuestion()" [disabled]="QuestionForm.invalid" class="btn btn-add-question">
+                  <i class=" bi bi-plus-circle me-2"></i>Add Question
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <a [routerLink]="['/T/home']" class="btn btn-lg px-3"
+    style="background: linear-gradient(90deg, #4b6cb7, #182848); color: white; border: none; border-radius: 50px; box-shadow: 0 4px 8px rgba(75, 108, 183, 0.3); min-width: 100px;">
+    <i class="bi bi-arrow-left-circle-fill me-2"></i>Back To Home
+  </a>
+</div>

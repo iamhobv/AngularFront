@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { NotFoundComponent } from './Pages/notfound/not-found.component';
 import { LoginComponent } from './Pages/LogIn/login.component';
 import { RegisterComponent } from './Pages/Register/register.component';
 import { authGuard } from './Guards/auth-gaurd.guard';
@@ -20,6 +19,9 @@ import { ViewResultComponent } from './Components/Stuent/view-result/view-result
 import { StudentAvailableExamsComponent } from './Components/Stuent/student-available-exams/student-available-exams.component';
 import { StudentExamComponent } from './Components/Stuent/student-exam/student-exam.component';
 import { StudentTakeExamComponent } from './Pages/student-take-exam/student-take-exam.component';
+import { EditExamComponent } from './Components/Teacher/edit-exam/edit-exam.component';
+import { NotFoundTeacherComponent } from './Pages/not-found-teacher/not-found-teacher.component';
+import { NotFoundStudentComponent } from './Pages/not-found-student/not-found-student.component';
 
 
 export const routes: Routes = [
@@ -37,8 +39,10 @@ export const routes: Routes = [
            {path:'AddExam',component:AddExamComponent,title:'Add Exam'},
            {path:'ShowExams',component:ShowAllExamsComponent,title:'Show Exams'},
            {path:'ShowExamDetails/:id',component:ExamDetailsComponent,title:'Show Exams Details'},
+           {path:'EditExam/:id',component:EditExamComponent,title:'Edit Exam'},
 
-           { path: '**', component: NotFoundComponent ,title:'Error'}
+
+           { path: '**', component: NotFoundTeacherComponent ,title:'Error'}
 
     ]},
 
@@ -51,12 +55,11 @@ export const routes: Routes = [
            {path:'availableExams',component:StudentAvailableExamsComponent,title:'Available Exams'},
            {path:'ViewResult/:examId',component:ViewResultComponent,title:'Result'},
 
-           { path: '**', component: NotFoundComponent ,title:'Error'}
+           { path: '**', component: NotFoundStudentComponent ,title:'Error'}
 
         
     ]},
     
    
-    {path:'**',component:NotFoundComponent}
 ];
 
